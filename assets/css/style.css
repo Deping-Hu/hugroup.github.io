@@ -24,3 +24,11 @@ body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 
 .gallery-grid img{width:100%; height:210px; object-fit:cover; border-radius:14px;}
 a{color:var(--brand);}
 a:hover{color:var(--brand2);}
+
+.pub-badge{ text-decoration:none; font-weight:600; }
+.pub-badge.disabled{ pointer-events:none; opacity:0.55; }
+
+/* Publications inline links */
+.pub-links{ font-size:0.95em; }
+.pub-links a{ text-decoration:none; }
+.pub-links a:hover{ text-decoration:underline; }

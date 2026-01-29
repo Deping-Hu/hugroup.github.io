@@ -39,3 +39,24 @@ Put images in `assets/img/gallery/` and list them in `assets/data/gallery.json`.
 
 ## Deploy on GitHub Pages
 See the step-by-step guide in the chat response.
+
+
+## Publications links (permanent DOI links)
+
+- The site displays a **single-column** publication list.
+- Each entry shows its citation text, followed by inline links: **(PDF | Link)**.
+- The `Link` is intended to be a **permanent DOI URL** (recommended format: `https://doi.org/<DOI>`).
+
+### Fill missing DOI links automatically (optional)
+
+If some `url` fields are still empty in `assets/data/publications.json`, you can auto-fetch DOIs via Crossref:
+
+1. Make sure Python 3 is installed.
+2. Install dependency:
+   - `pip install requests`
+3. Edit `tools/fetch_dois.py` and set `USER_AGENT` with your email.
+4. Run:
+   - `python tools/fetch_dois.py`
+
+This will update `assets/data/publications.json` in place.
+
