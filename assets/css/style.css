@@ -27,8 +27,3 @@ a:hover{color:var(--brand2);}
 
 .pub-badge{ text-decoration:none; font-weight:600; }
 .pub-badge.disabled{ pointer-events:none; opacity:0.55; }
-
-/* Publications inline links */
-.pub-links{ font-size:0.95em; }
-.pub-links a{ text-decoration:none; }
-.pub-links a:hover{ text-decoration:underline; }
