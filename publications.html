@@ -43,18 +43,17 @@
 </header>
 
 <main class="container py-5">
-  <div class="row g-5">
-    <div class="col-lg-6">
-      <h2 class="section-title mb-3">2023–Present</h2>
-      <div id="pubAfter"></div>
-    </div>
-    <div class="col-lg-6">
-      <h2 class="section-title mb-3">Before 2023</h2>
-      <div id="pubBefore"></div>
-    </div>
-  </div>
+  <section>
+    <h2 class="section-title mb-3">2023–Present</h2>
+    <div id="pubAfter"></div>
+  </section>
 
-  <div class="alert alert-light border mt-5">
+  <section class="mt-5">
+    <h2 class="section-title mb-3">Before 2023</h2>
+    <div id="pubBefore"></div>
+  </section>
+
+  <div class="alert alert-light border mt-5"> alert-light border mt-5">
     <div class="fw-semibold mb-1"><i class="bi bi-info-circle me-1"></i>How to attach PDF / Link</div>
     <ol class="mb-0">
       <li>Put your PDF file under <code>assets/papers/</code> (e.g., <code>assets/papers/2025_JPCL_dendrimers.pdf</code>).</li>
@@ -83,10 +82,59 @@
 
 
 <script>
-function pubItem(p){
-  const pdfBtn = p.pdf ? `<a class="btn btn-sm btn-outline-primary" href="${p.pdf}" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>` : '';
-  const urlBtn = p.url ? `<a class="btn btn-sm btn-outline-secondary" href="${p.url}" target="_blank" rel="noopener"><i class="bi bi-link-45deg me-1"></i>Link</a>` : '';
-  const btns = (pdfBtn || urlBtn) ? `<div class="d-flex flex-wrap gap-2 mt-2">${pdfBtn}${urlBtn}</div>` : '';
+/* Publications renderer (single-column layout + auto link lookup)
+   If "url" is empty in publications.json, the page will try:
+   (1) DOI extraction from the citation text, then
+   (2) Crossref bibliographic search, cached in localStorage.
+*/
+function hashString(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){
+    h = ((h<<5) - h) + s.charCodeAt(i);
+    h |= 0;
+  }
+  return (h>>>0).toString(16);
+}
+
+function doiFromText(t){
+  if(!t) return '';
+  const m = t.match(/10\.\d{4,9}\/[-._;()\/:A-Z0-9]+/i);
+  return m ? m[0] : '';
+}
+
+async function resolveCrossrefUrl(citation){
+  const c = (citation || '').trim();
+  if(!c) return '';
+  const cacheKey = 'puburl:' + hashString(c);
+  const cached = localStorage.getItem(cacheKey);
+  if(cached) return cached;
+
+  const api = `https://api.crossref.org/works?query.bibliographic=${encodeURIComponent(c)}&rows=1`;
+  const res = await fetch(api, { headers: { 'Accept': 'application/json' } });
+  if(!res.ok) return '';
+
+  const data = await res.json();
+  const item = data && data.message && data.message.items && data.message.items[0];
+  let url = '';
+  if(item){
+    if(item.URL) url = item.URL;
+    else if(item.DOI) url = `https://doi.org/${item.DOI}`;
+  }
+  if(url) localStorage.setItem(cacheKey, url);
+  return url;
+}
+
+function pubItem(p, idx){
+  const pdfBtn = p.pdf
+    ? `<a class="btn btn-sm btn-outline-primary" href="${p.pdf}" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>`
+    : '';
+  const url = (p.url || '').trim();
+  const linkBtn = url
+    ? `<a class="btn btn-sm btn-outline-secondary" href="${url}" target="_blank" rel="noopener"><i class="bi bi-link-45deg me-1"></i>Link</a>`
+    : `<a class="btn btn-sm btn-outline-secondary disabled" data-pub-link-btn="${idx}" tabindex="-1" aria-disabled="true"><i class="bi bi-link-45deg me-1"></i>Link</a>`;
+
+  const btns = `<div class="d-flex flex-wrap gap-2 mt-2">${pdfBtn}${linkBtn}</div>`;
+
   return `
     <div class="pub-item">
       <div class="small-muted"><span class="pub-year">${p.year}</span></div>
@@ -96,18 +144,70 @@ function pubItem(p){
   `;
 }
 
+function sleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
+
+async function fillMissingLinks(pubs){
+  // Resolve missing links sequentially to be gentle on public APIs.
+  for(let idx=0; idx<pubs.length; idx++){
+    const p = pubs[idx];
+    if((p.url || '').trim()) continue;
+
+    const btn = document.querySelector(`[data-pub-link-btn="${idx}"]`);
+    if(!btn) continue;
+
+    // Try DOI directly from citation first.
+    const doi = doiFromText(p.citation || '');
+    let url = doi ? `https://doi.org/${doi}` : '';
+
+    // Otherwise use Crossref bibliographic search.
+    if(!url){
+      try{
+        url = await resolveCrossrefUrl(p.citation || '');
+      }catch(e){
+        url = '';
+      }
+      // Small delay between requests
+      await sleep(350);
+    }
+
+    if(url){
+      btn.classList.remove('disabled');
+      btn.setAttribute('href', url);
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'noopener');
+      btn.removeAttribute('tabindex');
+      btn.removeAttribute('aria-disabled');
+      btn.removeAttribute('data-pub-link-btn');
+    }else{
+      // If we can’t find it, replace button with a subtle label
+      btn.outerHTML = `<span class="small-muted">Link unavailable</span>`;
+    }
+  }
+}
+
 async function loadPubs(){
   const res = await fetch('assets/data/publications.json');
   const pubs = await res.json();
 
-  const after = pubs.filter(p => p.year >= 2023);
-  const before = pubs.filter(p => p.year < 2023);
+  // sort by year desc (keeps your numbering stable within the file, but looks nicer)
+  pubs.sort((a,b) => (b.year||0) - (a.year||0));
 
-  document.getElementById('pubAfter').innerHTML = after.map(pubItem).join('');
-  document.getElementById('pubBefore').innerHTML = before.map(pubItem).join('');
+  const after = pubs.map((p,idx)=>({p,idx})).filter(x => (x.p.year||0) >= 2023);
+  const before = pubs.map((p,idx)=>({p,idx})).filter(x => (x.p.year||0) < 2023);
+
+  document.getElementById('pubAfter').innerHTML = after.map(x=>pubItem(x.p,x.idx)).join('');
+  document.getElementById('pubBefore').innerHTML = before.map(x=>pubItem(x.p,x.idx)).join('');
+
+  // Auto-resolve missing links
+  fillMissingLinks(pubs);
 }
+
 loadPubs().catch(err=>{
-  document.getElementById('pubAfter').innerHTML = `<div class="text-danger">Failed to load publications.json: ${err}</div>`;
+  const msg = `<div class="text-danger">Failed to load publications.json: ${err}</div>`;
+  const a = document.getElementById('pubAfter');
+  const b = document.getElementById('pubBefore');
+  if(a) a.innerHTML = msg;
+  if(b) b.innerHTML = msg;
 });
 </script>
 </body>
