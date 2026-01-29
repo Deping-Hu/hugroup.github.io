@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Your Name",
+    "role": "Principal Investigator",
+    "photo": "assets/img/people/pi.svg",
+    "bio": "Short bio (2–4 sentences). Research interests, key methods, and a fun fact if you like.",
+    "email": "name@university.edu",
+    "website": "",
+    "scholar": "",
+    "cv": "assets/docs/CV.pdf"
+  },
+  {
+    "name": "Member Name",
+    "role": "PhD Student",
+    "photo": "assets/img/people/member1.svg",
+    "bio": "Short bio. Project focus, previous education, and interests.",
+    "email": "",
+    "website": "",
+    "scholar": "",
+    "cv": ""
+  }
+]
