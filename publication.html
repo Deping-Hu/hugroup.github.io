@@ -1,130 +1,206 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Publications | Your Group</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
+  <title>Publications | Hu Group</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="assets/css/style.css" />
 
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">Your Group</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
-      aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
-        <li class="nav-item"><a class="nav-link" href="publication.html">Publications</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="positions.html">Open Positions</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Hu Group</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
+          <li class="nav-item"><a class="nav-link" href="publication.html">Publications</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="positions.html">Open Positions</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 
-<header class="hero py-4">
-  <div class="container py-3">
-    <h1 class="section-title mb-1">Publications</h1>
-    <div class="text-muted">
-      Maintained in <code>assets/data/publications.json</code>. Add PDFs to <code>assets/papers/</code> and paste external links as needed.
+  <header class="hero py-4">
+    <div class="container py-3">
+      <h1 class="section-title mb-1">Publications</h1>
+
     </div>
-  </div>
-</header>
+  </header>
 
-<main class="container py-5">
-  <section>
-    <h2 class="section-title mb-3">2023–Present</h2>
-    <div id="pubAfter"></div>
-  </section>
+  <main class="container py-5">
+    <section>
 
-  <section class="mt-5">
-    <h2 class="section-title mb-3">Before 2023</h2>
-    <div id="pubBefore"></div>
-  </section>
+      <div id="pubAfter"></div>
+    </section>
 
-  <div class="alert alert-light border mt-5">
-    <div class="fw-semibold mb-1"><i class="bi bi-info-circle me-1"></i>How to attach PDF / Link</div>
-    <ol class="mb-0">
-      <li>Put your PDF file under <code>assets/papers/</code> (e.g., <code>assets/papers/2025_JPCL_dendrimers.pdf</code>).</li>
-      <li>Open <code>assets/data/publications.json</code>, find the corresponding entry, and fill <code>"pdf"</code> and/or <code>"url"</code>.</li>
-    </ol>
-  </div>
-</main>
+    <section class="mt-5">
+      <h2 class="section-title mb-3">Before BNU</h2>
+      <div id="pubBefore"></div>
+    </section>
 
 
-<footer class="footer py-4 mt-5">
-  <div class="container small small-muted text-center">
-    © <span id="y"></span> · Powered by GitHub Pages
-  </div>
-</footer>
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
+  </main>
+
+
+  <footer class="footer py-4 mt-5">
+    <div class="container small small-muted text-center">
+      © <span id="y"></span> · Powered by GitHub Pages
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
 
 
 
-<script>
-async function loadPublications(){
-  const afterEl = document.getElementById('pubAfter');
-  const beforeEl = document.getElementById('pubBefore');
+  <script>
+    async function loadPublications() {
+      const afterEl = document.getElementById('pubAfter');
+      const beforeEl = document.getElementById('pubBefore');
 
-  function renderList(list, target){
-    target.innerHTML = '';
-    if(!list.length){
-      target.innerHTML = '<div class="text-muted">No publications yet.</div>';
-      return;
-    }
-    const frag = document.createDocumentFragment();
-    list.forEach(p=>{
-      const div = document.createElement('div');
-      div.className = 'pub-item';
-      const cite = document.createElement('span');
-      cite.textContent = p.citation || '';
-      div.appendChild(cite);
+      function renderList(list, target) {
+        target.innerHTML = '';
+        if (!list.length) {
+          target.innerHTML = '<div class="text-muted">No publications yet.</div>';
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        list.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'pub-item';
 
-      const links = [];
-      if(p.pdf){
-        links.push(`<a href="${p.pdf}" target="_blank" rel="noopener">PDF</a>`);
+          const cite = document.createElement('span');
+          // Remove existing hardcoded numbering (e.g., "46. ", "1. ")
+          // Regex looks for start of string, optional whitespace, digits, dot, optional whitespace
+          let cleanCitation = (p.citation || '').replace(/^\s*\d+\.\s*/, '');
+
+          // Add dynamic numbering
+          const numSpan = document.createElement('span');
+          numSpan.textContent = `${p.displayNum}. `;
+
+          cite.appendChild(numSpan);
+
+          // Allow HTML in citation (e.g., for superscripts <sup>*</sup>)
+          // Also bold the year if it exists in the citation
+          if (p.year) {
+            // Replace "Year," or "Year." to avoid replacing page numbers?
+            // Safest is to replace the first occurrence of the year if it matches the 'year' field
+            // But simpler is just replace all occurrences? No, page numbers like 2025 might exist? Unlikely.
+            // Let's replace only if surrounded by non-digits or at start/end
+            // Let's replace only if surrounded by non-digits or at start/end
+            const yearRegex = new RegExp(`\\b${p.year}\\b`);
+            cleanCitation = cleanCitation.replace(yearRegex, `<strong>${p.year}</strong>`);
+
+            // Explicitly italicize known journals
+            // Sorted by length desc to match longest first (e.g. match "J. Phys. Chem. Lett." before "J. Phys. Chem.")
+            const knownJournals = [
+              "J. Phys. Chem. Lett.",
+              "J. Chem. Theory Comput.",
+              "Chinese J. Chem. Phys.",
+              "J. Chem. Phys.",
+              "J. Phys. Chem. A",
+              "J. Phys. Chem. B",
+              "J. Phys. Chem. C",
+              "J. Photochem. Photobiol. A",
+              "Adv. Healthcare Mater.",
+              "Commun. Comput. Chem.",
+              "Acs Appl. Mater. Inter.",
+              "Phys. Chem. Chem. Phys.",
+              "Chem. Phys.",
+              "Chemosphere",
+              "Front. Chem.",
+              "Nature",
+              "Science",
+              "Angew. Chem. Int. Ed.",
+              "J. Am. Chem. Soc.",
+              "J. Mater. Chem. A",
+              "J. Mater. Chem. C",
+              "J. Comput. Chem.",
+              "Electrochemistry",
+              "Sci. Sin. Chim.",
+              "Soft Matter",
+              "Mater. Horiz.",
+              "Adv. Sci.",
+              "Acta Phys.-Chim. Sin."
+            ];
+
+            // Iterate and replace first occurrence found
+            for (const journal of knownJournals) {
+              if (cleanCitation.includes(journal)) {
+                // Check if already italicized (to avoid double wrapping if logic runs multiple times or overlaps)
+                if (!cleanCitation.includes(`<em>${journal}</em>`)) {
+                  // Replace the journal name with italicized version
+                  cleanCitation = cleanCitation.replace(journal, `<em>${journal}</em>`);
+                  // Break after finding the main journal? Usually only one per citation.
+                  break;
+                }
+              }
+            }
+          }
+
+          const textSpan = document.createElement('span');
+          textSpan.innerHTML = cleanCitation;
+          cite.appendChild(textSpan);
+          div.appendChild(cite);
+
+          const links = [];
+          if (p.pdf) {
+            links.push(`<a href="${p.pdf}" target="_blank" rel="noopener">PDF</a>`);
+          }
+          if (p.url) {
+            links.push(`<a href="${p.url}" target="_blank" rel="noopener">Link</a>`);
+          }
+          if (links.length) {
+            const s = document.createElement('span');
+            s.innerHTML = ` <span class="text-muted">(${links.join(' | ')})</span>`;
+            div.appendChild(s);
+          }
+          frag.appendChild(div);
+        });
+        target.appendChild(frag);
       }
-      if(p.url){
-        links.push(`<a href="${p.url}" target="_blank" rel="noopener">Link</a>`);
-      }
-      if(links.length){
-        const s = document.createElement('span');
-        s.innerHTML = ` <span class="text-muted">(${links.join(' | ')})</span>`;
-        div.appendChild(s);
-      }
-      frag.appendChild(div);
-    });
-    target.appendChild(frag);
-  }
 
-  try{
-    const res = await fetch('assets/data/publications.json', { cache: 'no-store' });
-    if(!res.ok) throw new Error('Failed to load publications.json');
-    const pubs = await res.json();
+      try {
+        const res = await fetch('assets/data/publications.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load publications.json');
+        const pubs = await res.json();
 
-    // Sort by year desc then keep stable by citation
-    pubs.sort((a,b)=> (b.year||0)-(a.year||0) || (a.citation||'').localeCompare(b.citation||''));
+        // Capture original index to ensure stable sort based on JSON order
+        pubs.forEach((p, i) => p.originalIndex = i);
 
-    const after = pubs.filter(p => (p.year||0) >= 2023);
-    const before = pubs.filter(p => (p.year||0) < 2023);
+        // Sort by year desc, then by original index asc (stable)
+        // This ensures new items added to top of JSON (index 0) appear first
+        pubs.sort((a, b) => (b.year || 0) - (a.year || 0) || (a.originalIndex - b.originalIndex));
 
-    renderList(after, afterEl);
-    renderList(before, beforeEl);
-  }catch(err){
-    const msg = `
+        // Assign reverse numbering (Newest = Total Count, Oldest = 1)
+        pubs.forEach((p, i) => {
+          p.displayNum = pubs.length - i;
+        });
+
+        // Split by displayNum (Top > 32, Bottom <= 32)
+        const after = pubs.filter(p => p.displayNum > 32);
+        const before = pubs.filter(p => p.displayNum <= 32);
+
+        renderList(after, afterEl);
+        renderList(before, beforeEl);
+      } catch (err) {
+        const msg = `
       <div class="alert alert-warning border">
         <div class="fw-semibold mb-1">Publications cannot be displayed on this page.</div>
         <div class="small">
@@ -133,13 +209,14 @@ async function loadPublications(){
           <code>python -m http.server</code> and open <code>http://localhost:8000</code>.
         </div>
       </div>`;
-    afterEl.innerHTML = msg;
-    beforeEl.innerHTML = '';
-    console.error(err);
-  }
-}
-loadPublications();
-</script>
+        afterEl.innerHTML = msg;
+        beforeEl.innerHTML = '';
+        console.error(err);
+      }
+    }
+    loadPublications();
+  </script>
 
 </body>
+
 </html>
