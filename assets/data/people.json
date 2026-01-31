@@ -1,18 +1,22 @@
 [
   {
-    "name": "Your Name",
+    "id": "deping-hu",
+    "url": "peoples/deping.html",
+    "name": "Deping Hu (胡德平)",
     "role": "Principal Investigator",
-    "photo": "assets/img/people/pi.svg",
+    "photo": "assets/img/people/deping_hu.jpg",
     "bio": "Short bio (2–4 sentences). Research interests, key methods, and a fun fact if you like.",
-    "email": "name@university.edu",
+    "email": "depinghu@bnu.edu.cn",
     "website": "",
-    "scholar": "",
+    "scholar": "https://scholar.google.com/citations?user=N2DF_KUAAAAJ&hl=en",
     "cv": "assets/docs/CV.pdf"
   },
   {
+    "id": "tongtong-yu",
+    "url": "peoples/tongtong.html",
     "name": "Tongtong Yu (余彤桐)",
     "role": "Undergraduate Student",
-    "photo": "assets/img/people/member2.jpg",
+    "photo": "assets/img/people/tongtong_yu.jpg",
     "bio": "She is a physics student at Beijing Normal University, and won the National Scholarship (2024-2025). She joined the Hu Group in 2025 and is working on the non-adiabatic dynamics simulations for polariton.",
     "email": "",
     "website": "",

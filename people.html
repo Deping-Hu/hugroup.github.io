@@ -36,21 +36,19 @@
   </nav>
 
 
+
+
+
   <header class="hero py-4">
     <div class="container py-3">
       <h1 class="section-title mb-1">People</h1>
-      <div class="text-muted">Photos and short bios of current members. Edit <code>assets/data/people.json</code> to
-        update.</div>
     </div>
   </header>
 
   <main class="container py-5">
     <div id="peopleGrid" class="row g-4"></div>
 
-    <hr class="my-5" />
 
-    <h2 class="section-title mb-3">Alumni (optional)</h2>
-    <p class="text-muted">You can add an alumni section here if you want.</p>
   </main>
 
 
@@ -70,23 +68,13 @@
       const people = await res.json();
       const grid = document.getElementById('peopleGrid');
       grid.innerHTML = people.map((p, idx) => `
-    <div class="col-md-6 col-lg-4">
-      <div class="card card-hover h-100 shadow-sm">
-        <div class="card-body">
-          <div class="d-flex gap-3 align-items-center">
-            <img class="member-img" src="${p.photo}" alt="${p.name} photo" loading="lazy">
-            <div>
-              <div class="h5 mb-0">${p.name}</div>
-              <div class="small text-muted">${p.role}</div>
-              <div class="d-flex flex-wrap gap-2 mt-2">
-                ${p.email ? `<a class="badge badge-soft rounded-pill text-decoration-none" href="mailto:${p.email}"><i class="bi bi-envelope me-1"></i>Email</a>` : ''}
-                ${p.website ? `<a class="badge badge-soft rounded-pill text-decoration-none" href="${p.website}" target="_blank" rel="noopener"><i class="bi bi-globe me-1"></i>Website</a>` : ''}
-                ${p.scholar ? `<a class="badge badge-soft rounded-pill text-decoration-none" href="${p.scholar}" target="_blank" rel="noopener"><i class="bi bi-mortarboard me-1"></i>Scholar</a>` : ''}
-                ${p.cv ? `<a class="badge badge-soft rounded-pill text-decoration-none" href="${p.cv}" target="_blank" rel="noopener"><i class="bi bi-file-earmark-text me-1"></i>CV</a>` : ''}
-              </div>
-            </div>
-          </div>
-          <p class="text-muted mt-3 mb-0">${p.bio || ''}</p>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center p-4">
+          <img class="rounded-circle mb-3" src="${p.photo}" alt="${p.name} photo" style="width: 160px; height: 160px; object-fit: cover;" loading="lazy">
+          <h5 class="mb-1">${p.name}</h5>
+          <div class="text-primary small mb-3 fw-bold" style="font-size: 0.8rem; letter-spacing: 1px;">${p.role}</div>
+          <a href="${p.url || 'profile.html?id=' + p.id}" class="btn btn-outline-dark btn-sm rounded-pill px-4">Learn More</a>
         </div>
       </div>
     </div>
